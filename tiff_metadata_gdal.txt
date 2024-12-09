@@ -1,0 +1,339 @@
+GDAL Metadata Export Date: 2024-12-10 01:06:21.201984
+==================================================
+
+--------------------------------------------------
+File: IMG_MIR.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_MIR.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
+--------------------------------------------------
+File: IMG_SWIR.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_SWIR.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
+--------------------------------------------------
+File: IMG_TIR1.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_TIR1.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
+--------------------------------------------------
+File: IMG_TIR2.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_TIR2.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
+--------------------------------------------------
+File: IMG_VIS.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_VIS.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
+--------------------------------------------------
+File: IMG_WV.tif
+--------------------------------------------------
+Driver: GTiff/GeoTIFF
+Files: projected_data\IMG_WV.tif
+Size is 1737, 1616
+Coordinate System is:
+PROJCRS["unknown",
+    BASEGEOGCRS["unknown",
+        DATUM["unknown",
+            ELLIPSOID["unknown",6378137,298.25722293287,
+                LENGTHUNIT["metre",1,
+                    ID["EPSG",9001]]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433,
+                ID["EPSG",9122]]]],
+    CONVERSION["Mercator (variant B)",
+        METHOD["Mercator (variant B)",
+            ID["EPSG",9805]],
+        PARAMETER["Latitude of 1st standard parallel",17.75,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8823]],
+        PARAMETER["Longitude of natural origin",77.25,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["False easting",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",0,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["easting",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]],
+        AXIS["northing",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1,
+                ID["EPSG",9001]]]]
+Data axis to CRS axis mapping: 1,2
+Origin = (-3473242.733735237270594,5401854.420192823745310)
+Pixel Size = (3999.128075688240642,-3997.987690401850159)
+Metadata:
+  AREA_OR_POINT=Area
+Image Structure Metadata:
+  INTERLEAVE=BAND
+Corner Coordinates:
+Upper Left  (-3473242.734, 5401854.420) ( 44d30' 0.00"E, 45d30' 0.00"N)
+Lower Left  (-3473242.734,-1058893.687) ( 44d30' 0.00"E, 10d 0' 0.00"S)
+Upper Right ( 3473242.734, 5401854.420) (110d 0' 0.00"E, 45d30' 0.00"N)
+Lower Right ( 3473242.734,-1058893.687) (110d 0' 0.00"E, 10d 0' 0.00"S)
+Center      (      -0.000, 2171480.366) ( 77d15' 0.00"E, 20d10'38.11"N)
+Band 1 Block=1737x1 Type=Float64, ColorInterp=Gray
+
+
