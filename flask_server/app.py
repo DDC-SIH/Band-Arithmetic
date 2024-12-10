@@ -1,9 +1,9 @@
-
-from flask import Flask, request, send_file, jsonify
+from flask import Flask, request, jsonify
 import os
 from utils.processor import process_config
 import json
 import logging
+import boto3
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -14,6 +14,10 @@ app = Flask(__name__)
 # Ensure required directories exist
 os.makedirs('uploads', exist_ok=True)
 os.makedirs('results', exist_ok=True)
+
+# Configure S3 client
+s3_client = boto3.client('s3', region_name='ap-south-1')
+bucket_name = 'processingdatatodownload'
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -31,13 +35,14 @@ def process():
         # Process the config
         zip_path = process_config(config_path)
         
-        # Send the zip file
-        return send_file(
-            zip_path,
-            mimetype='application/zip',
-            as_attachment=True,
-            download_name='cropped_results.zip'
-        )
+        # Upload the zip file to S3
+        s3_key = os.path.basename(zip_path)
+        s3_client.upload_file(zip_path, bucket_name, s3_key)
+        
+        # Generate the S3 file URL
+        s3_url = f"https://{bucket_name}.s3.ap-south-1.amazonaws.com/{s3_key}"
+        
+        return jsonify({'s3_url': s3_url}), 200
             
     except Exception as e:
         logger.error(f"Processing error: {str(e)}")
@@ -46,10 +51,12 @@ def process():
         # Cleanup
         if os.path.exists(config_path):
             os.remove(config_path)
+        if os.path.exists(zip_path):
+            os.remove(zip_path)
 
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'healthy'}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=80)
