@@ -8,6 +8,8 @@ import os
 import zipfile
 from rasterio.warp import transform_geom
 from .colorization import apply_colormap
+import numpy as np
+import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

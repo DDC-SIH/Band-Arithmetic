@@ -3,11 +3,16 @@ from typing import Tuple, Dict, Union, Optional
 
 def calculate_ndvi(nir_band: np.ndarray, red_band: np.ndarray) -> np.ndarray:
     """Calculate Normalized Difference Vegetation Index."""
-    return (nir_band - red_band) / (nir_band + red_band)
+    denominator = (nir_band + red_band)
+    # Avoid division by zero
+    denominator = np.where(denominator == 0, np.nan, denominator)
+    return np.divide((nir_band - red_band), denominator)
 
 def calculate_ndwi(nir_band: np.ndarray, green_band: np.ndarray) -> np.ndarray:
     """Calculate Normalized Difference Water Index."""
-    return (green_band - nir_band) / (green_band + nir_band)
+    denominator = (green_band + nir_band)
+    denominator = np.where(denominator == 0, np.nan, denominator)
+    return np.divide((green_band - nir_band), denominator)
 
 def calculate_evi(nir_band: np.ndarray, red_band: np.ndarray, blue_band: np.ndarray) -> np.ndarray:
     """Calculate Enhanced Vegetation Index."""

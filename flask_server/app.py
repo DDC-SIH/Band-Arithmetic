@@ -21,6 +21,8 @@ bucket_name = 'processingdatatodownload'
 
 @app.route('/process', methods=['POST'])
 def process():
+    config_path = None
+    zip_path = None
     try:
         # Get JSON data from request
         config_data = request.get_json()
@@ -49,14 +51,24 @@ def process():
         return jsonify({'error': str(e)}), 500
     finally:
         # Cleanup
-        if os.path.exists(config_path):
+        if config_path and os.path.exists(config_path):
             os.remove(config_path)
-        if os.path.exists(zip_path):
+        if zip_path and os.path.exists(zip_path):
             os.remove(zip_path)
 
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({'status': 'healthy'}), 200
 
+@app.route('/', methods=['GET'])
+def root():
+    return jsonify({
+        'status': 'online',
+        'endpoints': {
+            '/process': 'POST - Process band arithmetic',
+            '/health': 'GET - Health check'
+        }
+    }), 200
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=80)
+    app.run(debug=True, host='0.0.0.0', port=5000)

@@ -1,0 +1,22 @@
+{
+  "aoi": {
+    "north": 50.0,
+    "south": 15.0,
+    "east": 85.0,
+    "west": 35.0,
+    "created": "2024-12-09T19:06:44.680Z",
+    "coordinateSystem": "EPSG:4326",
+    "units": "degrees"
+  },
+  "effects": {
+    "arithmatic": "evi",
+    "colormap": "magma",
+    "min": 0,
+    "max": 1,
+    "steps": 20
+  },
+  "urls": [
+    "https://somehowgetsplotted.s3.ap-south-1.amazonaws.com/somehowgetsplotted/IMG_VIS_optimized.tif",
+    "https://somehowgetsplotted.s3.ap-south-1.amazonaws.com/somehowgetsplotted/IMG_SWIR_optimized.tif"
+  ]
+}

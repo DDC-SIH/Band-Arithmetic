@@ -1,0 +1,33 @@
+{
+  "effects": {
+    "arithmatic": "ndvi",
+    "colormap": "magma",
+    "min": 0,
+    "max": 1,
+    "steps": 20
+  },
+  "polygon": {
+    "type": "Feature",
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [80.0, 35.0],
+          [95.0, 30.0],
+          [78.0, 10.0],
+          [80.0, 35.0]
+        ]
+      ]
+    },
+    "properties": {
+      "created": "2024-12-08T05:59:59.744Z",
+      "area": 224.43460023655686,
+      "coordinateSystem": "EPSG:4326",
+      "units": "degrees"
+    }
+  },
+  "urls": [
+    "https://somehowgetsplotted.s3.ap-south-1.amazonaws.com/somehowgetsplotted/IMG_VIS_optimized.tif",
+    "https://somehowgetsplotted.s3.ap-south-1.amazonaws.com/somehowgetsplotted/IMG_SWIR_optimized.tif"
+  ]
+}
