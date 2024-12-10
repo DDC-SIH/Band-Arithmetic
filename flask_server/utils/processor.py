@@ -7,6 +7,7 @@ import requests
 import os
 import zipfile
 from rasterio.warp import transform_geom
+from .colorization import apply_colormap
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -151,6 +152,20 @@ def process_config(config_file: str) -> str:
                 dest.write(result[np.newaxis, :, :])
             
             output_files = [output_file]
+            
+            # Apply colormap if specified
+            if "colormap" in config["effects"]:
+                colormap_name = config["effects"]["colormap"]
+                # Get min, max, steps from config or use defaults
+                min_val = config["effects"].get("min", float(np.min(result)))
+                max_val = config["effects"].get("max", float(np.max(result)))
+                steps = config["effects"].get("steps", 256)
+                # Apply colormap
+                colorized_result = apply_colormap(result, colormap_name, min_val, max_val, steps)
+                # Save the colorized image
+                colorized_output_file = os.path.join('results', "band_arithmetic_result.png")
+                plt.imsave(colorized_output_file, colorized_result)
+                output_files.append(colorized_output_file)
         else:
             # Save individual cropped bands
             output_files = []
