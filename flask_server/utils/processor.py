@@ -104,6 +104,8 @@ def process_config(config_file: str) -> str:
         
         # Download and crop each TIFF
         cropped_bands = {}
+        output_files = []
+        
         for idx, url in enumerate(urls):
             local_file = os.path.join('uploads', f"band_{idx}.tif")
             downloaded_file = download_tiff(url, local_file)
@@ -113,47 +115,35 @@ def process_config(config_file: str) -> str:
                 geometry_feature["geometry"]
             )
             
-            # Store cropped data for band arithmetic
+            # Store cropped data
             band_name = f"band_{idx}"
-            cropped_bands[band_name] = cropped_data[0]  # Assuming single band tiffs
+            cropped_bands[band_name] = cropped_data[0]
+            
+            # Save cropped band
+            output_file = os.path.join('results', f"cropped_{idx}.tif")
+            with rasterio.open(output_file, "w", **out_meta) as dest:
+                dest.write(cropped_data[0][np.newaxis, :, :])
+            output_files.append(output_file)
             
             os.remove(downloaded_file)
 
-        # Process band arithmetic if specified
+        # Process band arithmetic if specified in effects
         if "effects" in config and "arithmatic" in config["effects"]:
             from .band_factory import BandArithmeticFactory
             
-            # Get metadata if provided
-            metadata = config.get("metadata", {})
-            
-            # Map band indices to their names based on config
-            band_mapping = {}
-            for band_name, band_idx in config.get("band_mapping", {}).items():
-                if f"band_{band_idx}" in cropped_bands:
-                    band_mapping[band_name] = cropped_bands[f"band_{band_idx}"]
-            
-            # If no mapping provided, use default mapping
-            if not band_mapping:
-                band_mapping = {
-                    'nir': cropped_bands['band_0'],
-                    'red': cropped_bands['band_1']
-                }
-            
-            # Calculate the index
+            # Calculate the index using all available bands
             result = BandArithmeticFactory.process_bands(
                 config["effects"]["arithmatic"],
-                band_mapping,
-                metadata=metadata
+                cropped_bands,
+                metadata=config.get("metadata", {})
             )
             
-            # Save the result
-            output_file = os.path.join('results', "band_arithmetic_result.tif")
+            # Save the arithmetic result
+            arithmetic_file = os.path.join('results', "band_arithmetic_result.tif")
             out_meta.update({"count": 1})
-            
-            with rasterio.open(output_file, "w", **out_meta) as dest:
+            with rasterio.open(arithmetic_file, "w", **out_meta) as dest:
                 dest.write(result[np.newaxis, :, :])
-            
-            output_files = [output_file]
+            output_files.append(arithmetic_file)
             
             # Apply colormap if specified
             if "colormap" in config["effects"]:
@@ -168,14 +158,6 @@ def process_config(config_file: str) -> str:
                 colorized_output_file = os.path.join('results', "band_arithmetic_result.png")
                 plt.imsave(colorized_output_file, colorized_result)
                 output_files.append(colorized_output_file)
-        else:
-            # Save individual cropped bands
-            output_files = []
-            for idx, band_data in cropped_bands.items():
-                output_file = os.path.join('results', f"cropped_{idx}.tif")
-                with rasterio.open(output_file, "w", **out_meta) as dest:
-                    dest.write(band_data[np.newaxis, :, :])
-                output_files.append(output_file)
         
         # Zip results
         zip_filename = os.path.join('results', "cropped_results.zip")

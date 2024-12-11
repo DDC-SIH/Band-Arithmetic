@@ -33,28 +33,6 @@ class BandArithmeticFactory:
         """Process the bands using the specified arithmetic method."""
         processor = BandArithmeticFactory.get_processor(method)
         
-        method_requirements = {
-            'ndvi': ['nir', 'red'],
-            'ndwi': ['nir', 'green'],
-            'evi': ['nir', 'red', 'blue'],
-            'savi': ['nir', 'red'],
-            'msavi': ['nir', 'red'],
-            'btt': ['tir'],
-            'cloud': ['tir1'],
-            'olr': ['tir1', 'tir2'],
-            'uth': ['wv'],
-            'amv': ['mir', 'wv'],
-            'ndsi': ['vis', 'swir'],
-            'aod': ['vis'],
-            'wvc': ['wv'],
-            'azimuth': ['azimuth']
-        }
-        
-        required_bands = method_requirements[method.lower()]
-        for band in required_bands:
-            if band not in bands:
-                raise ValueError(f"Missing required band '{band}' for {method}")
-        
         # Handle special cases with metadata requirements
         if method.lower() == 'btt' and metadata:
             return processor(
@@ -73,4 +51,5 @@ class BandArithmeticFactory:
                 metadata.get('wv_scale', 1.0)
             )
         else:
-            return processor(*[bands[band] for band in required_bands])
+            # Pass all available bands to the processor
+            return processor(*bands.values())
