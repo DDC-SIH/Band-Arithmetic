@@ -37,29 +37,26 @@ class BandArithmeticFactory:
 
     @staticmethod
     def process_bands(method: str, bands: Dict[str, np.ndarray], **kwargs) -> np.ndarray:
-        """Process the bands using the specified arithmetic method.
-        Bands are numbered according to their order in the input URLs."""
+        """Process the bands using the specified arithmetic method."""
         processor = BandArithmeticFactory.get_processor(method)
         method = method.lower()
 
-        # Match frontend band arithmetic formulas
-        if method == 'ndvi':
-            # NIR and RED
-            return processor(bands['band_2'], bands['band_1'])
-        elif method == 'evi':
-            # NIR, RED, BLUE
+        # Verify available bands
+        available_bands = len(bands)
+        required_bands = BandArithmeticFactory.get_required_bands(method)
+        
+        if available_bands < required_bands:
+            raise ValueError(f"{method} requires {required_bands} bands, but only {available_bands} provided")
+            
+        # Use available bands based on count
+        if method == 'none':
+            return processor(bands['band_1'])
+        elif method == 'evi' and available_bands >= 3:
             return processor(bands['band_3'], bands['band_2'], bands['band_1'])
-        elif method == 'savi':
-            # NIR and RED
+        elif method in ['msavi', 'ndwi'] and available_bands >= 2:
             return processor(bands['band_2'], bands['band_1'])
-        elif method == 'nbr':
-            # NIR and SWIR
+        elif available_bands >= 2:
+            # For all other two-band indices (ndvi, savi, nbr)
             return processor(bands['band_2'], bands['band_1'])
-        elif method == 'msavi':
-            # NIR and RED
-            return processor(bands['band_2'], bands['band_1'])
-        elif method == 'ndwi':
-            # GREEN and NIR
-            return processor(bands['band_2'], bands['band_3'])
         else:
             return processor(bands['band_1'])
