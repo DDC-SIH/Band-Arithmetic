@@ -14,29 +14,41 @@ import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def aoi_to_polygon(aoi: Dict) -> Dict:
-    """Convert AOI bounds to polygon geometry."""
+def aoi_to_polygon(aoi: Union[Dict, List]) -> Dict:
+    """Convert AOI bounds to polygon geometry.
+    
+    Supports both dictionary and list formats:
+    - Dict format: {"west": x, "north": y, "east": x, "south": y}
+    - List format: [west, south, east, north]
+    """
+    if isinstance(aoi, list):
+        west, south, east, north = aoi[0], aoi[1], aoi[2], aoi[3]
+    else:
+        west, north = aoi["west"], aoi["north"]
+        east, south = aoi["east"], aoi["south"]
+
     return {
         "type": "Polygon",
         "coordinates": [[
-            [aoi["west"], aoi["north"]],
-            [aoi["east"], aoi["north"]],
-            [aoi["east"], aoi["south"]],
-            [aoi["west"], aoi["south"]],
-            [aoi["west"], aoi["north"]]
+            [west, north],
+            [east, north],
+            [east, south],
+            [west, south],
+            [west, north]
         ]]
     }
 
 def get_geometry_from_config(config: Dict) -> Dict:
     """Extract geometry from config, handling both AOI and polygon cases."""
     if "aoi" in config:
+        geometry = aoi_to_polygon(config["aoi"])
         return {
             "type": "Feature",
-            "geometry": aoi_to_polygon(config["aoi"]),
+            "geometry": geometry,
             "properties": {
-                "created": config["aoi"].get("created", ""),
-                "coordinateSystem": config["aoi"].get("coordinateSystem", "EPSG:4326"),
-                "units": config["aoi"].get("units", "degrees")
+                "created": "",
+                "coordinateSystem": "EPSG:4326",
+                "units": "degrees"
             }
         }
     elif "polygon" in config:
@@ -161,18 +173,21 @@ def process_config(config_file: str) -> str:
                 steps = config["effects"].get("steps", 256)
                 # Apply colormap
                 colorized_result = apply_colormap(result, colormap_name, min_val, max_val, steps)
-                # Save the colorized image
+                # Save the colorized image separately (not included in zip)
                 colorized_output_file = os.path.join('results', "band_arithmetic_result.png")
                 plt.imsave(colorized_output_file, colorized_result)
-                output_files.append(colorized_output_file)
+                # Don't append PNG to output_files
         
-        # Zip results
+        # Zip only TIFF results
+        tiff_files = [f for f in output_files if f.endswith('.tif')]
         zip_filename = os.path.join('results', "cropped_results.zip")
-        zip_results(output_files, zip_filename)
+        zip_results(tiff_files, zip_filename)
         
-        # Clean up output files
+        # Clean up all output files including PNGs
         for file in output_files:
             os.remove(file)
+        if "colormap" in config.get("effects", {}):
+            os.remove(colorized_output_file)
             
         logger.info(f"Processing complete. Results saved in {zip_filename}")
         return zip_filename
