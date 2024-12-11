@@ -106,7 +106,8 @@ def process_config(config_file: str) -> str:
         cropped_bands = {}
         output_files = []
         
-        for idx, url in enumerate(urls):
+        # Band numbering starts from 1 to match specifications
+        for idx, url in enumerate(urls, start=1):
             local_file = os.path.join('uploads', f"band_{idx}.tif")
             downloaded_file = download_tiff(url, local_file)
             
@@ -115,7 +116,7 @@ def process_config(config_file: str) -> str:
                 geometry_feature["geometry"]
             )
             
-            # Store cropped data
+            # Store cropped data with band numbers starting from 1
             band_name = f"band_{idx}"
             cropped_bands[band_name] = cropped_data[0]
             
@@ -126,14 +127,20 @@ def process_config(config_file: str) -> str:
             output_files.append(output_file)
             
             os.remove(downloaded_file)
-
+            
         # Process band arithmetic if specified in effects
         if "effects" in config and "arithmatic" in config["effects"]:
             from .band_factory import BandArithmeticFactory
             
-            # Calculate the index using all available bands
+            # Validate required number of bands
+            method = config["effects"]["arithmatic"]
+            required_bands = BandArithmeticFactory.get_required_bands(method)
+            if len(cropped_bands) < required_bands:
+                raise ValueError(f"{method} requires {required_bands} bands, but only {len(cropped_bands)} provided")
+            
+            # Calculate the index using bands
             result = BandArithmeticFactory.process_bands(
-                config["effects"]["arithmatic"],
+                method,
                 cropped_bands,
                 metadata=config.get("metadata", {})
             )

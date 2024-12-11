@@ -1,55 +1,51 @@
-from typing import Dict, Any, Callable
+from typing import Dict, Callable
 import numpy as np
 from .band_arithmetic import *
 
 class BandArithmeticFactory:
     @staticmethod
+    def get_required_bands(method: str) -> int:
+        """Returns the number of required bands for each method."""
+        requirements = {
+            'none': 1,
+            'ndvi': 2,
+            'evi': 3,
+            'savi': 2,
+            'nbr': 2,
+            'msavi': 2,
+            'ndwi': 2
+        }
+        return requirements.get(method.lower(), 1)
+
+    @staticmethod
     def get_processor(method: str) -> Callable:
         """Returns the appropriate band arithmetic function based on method name."""
         processors = {
+            'none': calculate_none,
             'ndvi': calculate_ndvi,
-            'ndwi': calculate_ndwi,
             'evi': calculate_evi,
             'savi': calculate_savi,
+            'nbr': calculate_nbr,
             'msavi': calculate_msavi,
-            'btt': calculate_brightness_temp,
-            'cloud': calculate_cloud_mask,
-            'olr': calculate_olr,
-            'uth': calculate_uth,
-            'amv': calculate_amv,
-            'ndsi': calculate_ndsi,
-            'aod': calculate_aod,
-            'wvc': calculate_wvc,
-            'azimuth': calculate_azimuth
+            'ndwi': calculate_ndwi
         }
         
         if method.lower() not in processors:
-            raise ValueError(f"Unsupported band arithmetic method: {method}")
+            return calculate_none
         
         return processors[method.lower()]
 
     @staticmethod
-    def process_bands(method: str, bands: Dict[str, np.ndarray], metadata: Dict = None, **kwargs) -> np.ndarray:
+    def process_bands(method: str, bands: Dict[str, np.ndarray], **kwargs) -> np.ndarray:
         """Process the bands using the specified arithmetic method."""
         processor = BandArithmeticFactory.get_processor(method)
+        method = method.lower()
         
-        # Handle special cases with metadata requirements
-        if method.lower() == 'btt' and metadata:
-            return processor(
-                bands['tir'],
-                metadata.get('scale_factor', 1.0),
-                metadata.get('add_offset', 0.0)
-            )
-        elif method.lower() == 'olr':
-            return processor(bands['tir1'], bands['tir2'], kwargs.get('c', 1.1))
-        elif method.lower() == 'uth' and metadata:
-            return processor(bands['wv'], metadata.get('wv_scale_factor', 1.0))
-        elif method.lower() == 'amv' and metadata:
-            return processor(
-                bands['mir'], bands['wv'],
-                metadata.get('mir_scale', 1.0),
-                metadata.get('wv_scale', 1.0)
-            )
+        if method == 'none':
+            return processor(bands['band_1'])
+        elif method == 'evi':
+            return processor(bands['band_1'], bands['band_2'], bands['band_3'])
+        elif method == 'msavi':
+            return processor(bands['band_1'], bands['band_2'])
         else:
-            # Pass all available bands to the processor
-            return processor(*bands.values())
+            return processor(bands['band_1'], bands['band_2'])
