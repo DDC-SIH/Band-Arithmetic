@@ -37,15 +37,29 @@ class BandArithmeticFactory:
 
     @staticmethod
     def process_bands(method: str, bands: Dict[str, np.ndarray], **kwargs) -> np.ndarray:
-        """Process the bands using the specified arithmetic method."""
+        """Process the bands using the specified arithmetic method.
+        Bands are numbered according to their order in the input URLs."""
         processor = BandArithmeticFactory.get_processor(method)
         method = method.lower()
-        
-        if method == 'none':
-            return processor(bands['band_1'])
+
+        # Match frontend band arithmetic formulas
+        if method == 'ndvi':
+            # NIR and RED
+            return processor(bands['band_2'], bands['band_1'])
         elif method == 'evi':
-            return processor(bands['band_1'], bands['band_2'], bands['band_3'])
+            # NIR, RED, BLUE
+            return processor(bands['band_3'], bands['band_2'], bands['band_1'])
+        elif method == 'savi':
+            # NIR and RED
+            return processor(bands['band_2'], bands['band_1'])
+        elif method == 'nbr':
+            # NIR and SWIR
+            return processor(bands['band_2'], bands['band_1'])
         elif method == 'msavi':
-            return processor(bands['band_1'], bands['band_2'])
+            # NIR and RED
+            return processor(bands['band_2'], bands['band_1'])
+        elif method == 'ndwi':
+            # GREEN and NIR
+            return processor(bands['band_2'], bands['band_3'])
         else:
-            return processor(bands['band_1'], bands['band_2'])
+            return processor(bands['band_1'])
